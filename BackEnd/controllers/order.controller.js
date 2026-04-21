@@ -1,6 +1,6 @@
 const pool = require('../database/pool');
 const { broadcastStockUpdate } = require('../services/stockStream.js');
-const { publisher } = require('../database/redisPubSub');
+const { publisher } = require('../database/redis');
 
 const checkout = async (req, res, next) => {
   const client = await pool.connect();

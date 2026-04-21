@@ -35,7 +35,7 @@ const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
 
 // Redis startup
-const { connectRedis, subscriber } = require('./database/redisPubSub');
+const { connectRedis, subscriber } = require('./database/redis');
 const { broadcastStockUpdate } = require('./services/stockStream');
 
 async function startServer() {

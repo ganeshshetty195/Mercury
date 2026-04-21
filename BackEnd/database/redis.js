@@ -1,16 +1,23 @@
 const redis = require('redis');
 
-// Redis Cache Client
-const redisCache = redis.createClient();
-redisCache.connect();
+const publisher = redis.createClient();
+const subscriber = redis.createClient();
 
-redisCache.on('error', (err) => {
-  console.error('Redis Cache Error:', err);
+publisher.on('error', (err) => {
+  console.error('Redis publisher error:', err);
 });
 
-redisCache.on('connect', () => {
-  console.log('✅ Redis Cache connected');
+subscriber.on('error', (err) => {
+  console.error('Redis subscriber error:', err);
 });
 
+async function connectRedis() {
+  if (!publisher.isOpen) await publisher.connect();
+  if (!subscriber.isOpen) await subscriber.connect();
+}
 
-module.exports = redisCache;
+module.exports = {
+  publisher,
+  subscriber,
+  connectRedis,
+};

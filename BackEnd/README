@@ -1,0 +1,71 @@
+        ┌──────────────┐
+        │   products   │
+        ├──────────────┤
+        │ id (PK)      │
+        │ name         │
+        │ price        │
+        │ category     │
+        │ instock      │
+        └──────┬───────┘
+               │
+               │
+     ┌─────────▼─────────┐
+     │   cart_items      │
+     ├───────────────────┤
+     │ id (PK)           │
+     │ user_id           │
+     │ product_id (FK)   │
+     │ quantity          │
+     └─────────┬─────────┘
+               │
+               │ checkout
+               ▼
+        ┌──────────────┐
+        │    orders    │
+        ├──────────────┤
+        │ id (PK)      │
+        │ user_id      │
+        │ total_amount │
+        │ status       │
+        └──────┬───────┘
+               │
+               │
+     ┌─────────▼─────────┐
+     │  order_items      │
+     ├───────────────────┤
+     │ id (PK)           │
+     │ order_id (FK)     │
+     │ product_id (FK)   │
+     │ quantity          │
+     │ price             │
+     └───────────────────┘
+
+     System Flow Diagram
+
+
+  User
+  │
+  ▼
+Browse Products
+  │
+  ▼
+Add to Cart
+  │
+  ▼
+cart_items (DB)
+  │
+  ▼
+Checkout
+  │
+  ├── Create Order (orders)
+  ├── Create Order Items (order_items)
+  └── Clear Cart
+  │
+  ▼
+Order Created
+  │
+  ▼
+View Orders (/orders)
+  │
+  ▼
+View Order Details (/order/:id)

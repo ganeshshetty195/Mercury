@@ -30,6 +30,9 @@ app.use('/cart', cartRoutes);
 const orderRoutes = require('./routes/order.routes.js');
 app.use('/order', orderRoutes);
 
+const aiSearch = require('./routes/ai.routes.js');
+app.use('/ai', aiSearch);
+
 // Error handler
 const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
